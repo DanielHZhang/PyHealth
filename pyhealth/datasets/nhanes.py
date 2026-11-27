@@ -79,7 +79,8 @@ class NHANESDataset(BaseDataset):
             config_path=str(config_path),
             **kwargs,
         )
-        assert self.config is not None, "NHANES requires a dataset config"
+        if self.config is None:
+            raise ValueError("NHANES requires a dataset config")
         table = self.config.tables.get("participants")
         if table is None:
             raise ValueError("NHANES config must define a participants table")
