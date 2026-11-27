@@ -270,10 +270,13 @@ class NHANESDataset(BaseDataset):
                 summaries[cycle] = {
                     "demographics": len(demo),
                     "recordings": len(index),
-                    "recordings_with_demographics": index["SEQN"].isin(demo_ids).sum(),
-                    "recordings_with_mortality_record": index["SEQN"]
-                    .isin(mortality["SEQN"])
-                    .sum(),
+                    # Cast to int needed for json.dumps to serialize
+                    "recordings_with_demographics": int(
+                        index["SEQN"].isin(demo_ids).sum()
+                    ),
+                    "recordings_with_mortality_record": int(
+                        index["SEQN"].isin(mortality["SEQN"]).sum()
+                    ),
                     "minute_rows": minute_rows,
                 }
 
