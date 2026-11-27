@@ -54,6 +54,12 @@ class NHANESDataset(BaseDataset):
         dataset_name: Optional PyHealth dataset name.
         config_path: Optional YAML configuration. Defaults to ``nhanes.yaml``.
         **kwargs: Additional arguments forwarded to :class:`BaseDataset`.
+
+    Examples:
+        >>> from pyhealth.datasets import NHANESDataset
+        >>> prepared = NHANESDataset.prepare("raw", "prepared")
+        >>> dataset = NHANESDataset(root=prepared)
+        >>> dataset.stats()
     """
 
     def __init__(
@@ -104,23 +110,30 @@ class NHANESDataset(BaseDataset):
     ) -> Path:
         """Convert local CDC files into a new directory for :class:`NHANESDataset`.
 
-        Place the ``PAXRAW`` and ``DEMO`` files in ``raw_root/<cycle>/``. If you set
-        ``include_exams=True``, also add ``BMX`` and ``BPX``. The ``PAXRAW`` file
-        must be ordered by SEQN. Also, place the 2019 public-use linked mortality
-        files in ``raw_root/mortality/`` under their original names, (e.g.
-        ``NHANES_2003_2004_MORT_2019_PUBLIC.dat``).
+        Download the CDC files locally and arrange them under ``raw_root``:
 
-        Use ``_C`` for the 2003-2004 cycle (e.g., ``PAXRAW_C.xpt``) and
-        ``_D`` for the 2005-2006 cycle (e.g., ``PAXRAW_D.xpt``).
+        .. code-block:: text
+            raw/
+              2003-2004/DEMO_C.XPT
+              2003-2004/PAXRAW_C.zip
+              2005-2006/DEMO_D.XPT
+              2005-2006/PAXRAW_D.zip
+              mortality/NHANES_2003_2004_MORT_2019_PUBLIC.dat
+              mortality/NHANES_2005_2006_MORT_2019_PUBLIC.dat
 
-        For each dataset, provide a SAS Transport file (``.xpt``), a ZIP
-        archive containing one ``.xpt`` file, or a CSV that preserves the
-        original column names.
+        Each survey file can be a SAS Transport file (``.xpt``), a ZIP archive
+        containing one ``.xpt`` file, or a CSV with the original column names.
+        ``PAXRAW`` must be ordered by ``SEQN``. For BMI, waist circumference,
+        and blood pressure, place the matching ``BMX`` and ``BPX`` files in each
+        selected cycle directory (``_C`` for 2003-2004, ``_D`` for 2005-2006)
+        and pass ``include_exams=True``.
 
-        All participants with recordings are indexed, including those with
-        missing demographics or mortality linkage. No cohort or wear filters
-        are applied. Partially converted data are not published, and existing output
-        is not replaced.
+        The participant index stores source mortality fields and relative paths
+        to minute recordings. It includes every participant with a recording,
+        even if demographics or mortality linkage are missing. No cohort or
+        wear filters are applied. Conversion counts are written to
+        ``preparation_summary.json``. Partially converted data are not published,
+        and existing output is not replaced.
 
         Args:
             raw_root: Directory containing local CDC survey and mortality files.
