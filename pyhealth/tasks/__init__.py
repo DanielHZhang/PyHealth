@@ -143,6 +143,7 @@ from .next_visit_diagnosis_prediction import (
     NextVisitDiagnosisPredictionMIMIC3 as NextVisitDiagnosisPredictionMIMIC3,
     NextVisitDiagnosisPredictionMIMIC4 as NextVisitDiagnosisPredictionMIMIC4,
 )
+from .motion_age import NHANESMortality60Month as NHANESMortality60Month
 from .medical_transcriptions_classification import MedicalTranscriptionsClassification
 from .mortality_prediction import (
     MortalityPredictionEICU,
