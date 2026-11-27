@@ -52,6 +52,7 @@ SampleSignalDataset = _removed_1x_class(
 
 
 from .base_dataset import BaseDataset
+from .cdc_covid import CDCCOVIDDataset as CDCCOVIDDataset
 from .pbc import PBCDataset as PBCDataset
 from .imaging.patches import PatchDataset as PatchDataset
 from .imaging.stats import (
@@ -64,6 +65,7 @@ from .chaos import CHAOSDataset as CHAOSDataset
 from .chest_imagenome import ChestImaGenomeDataset as ChestImaGenomeDataset
 from .chestxray14 import ChestXray14Dataset
 from .ham10000 import HAM10000Dataset as HAM10000Dataset
+from .ph2 import PH2Dataset as PH2Dataset
 from .clinvar import ClinVarDataset
 from .cosmic import COSMICDataset
 from .covid19_cxr import COVID19CXRDataset
