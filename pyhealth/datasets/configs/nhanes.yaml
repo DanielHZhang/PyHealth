@@ -1,0 +1,25 @@
+version: "1.0.0"
+tables:
+  participants:
+    file_path: "participants.parquet"
+    patient_id: "seqn"
+    timestamp: null
+    attributes:
+      - "activity_file"
+      - "bmxbmi"
+      - "bmxwaist"
+      - "bpxdi1"
+      - "bpxdi2"
+      - "bpxdi3"
+      - "bpxdi4"
+      - "bpxsy1"
+      - "bpxsy2"
+      - "bpxsy3"
+      - "bpxsy4"
+      - "cycle"
+      - "eligstat"
+      - "indhhinc"
+      - "mortstat"
+      - "permth_int"
+      - "riagendr"
+      - "ridageyr"

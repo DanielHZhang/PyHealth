@@ -28,8 +28,7 @@ def _removed_1x_class(name: str, replacement: str) -> type:
                 f"{replacement}; see {docs}"
             )
         raise NotImplementedError(
-            f"{name} was removed in PyHealth 2.0. Use {replacement} instead; "
-            f"see {docs}"
+            f"{name} was removed in PyHealth 2.0. Use {replacement} instead; see {docs}"
         )
 
     return type(
@@ -105,6 +104,7 @@ from .sample_dataset import SampleBuilder, SampleDataset, create_sample_dataset
 from .abide import ABIDEDataset as ABIDEDataset
 from .shhs import SHHSDataset
 from .sleepedf import SleepEDFDataset
+from .nhanes import NHANESDataset as NHANESDataset
 from .nsrr_sleep import NSRRSleepDataset as NSRRSleepDataset
 from .bmd_hs import BMDHSDataset
 from .support2 import Support2Dataset
